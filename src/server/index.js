@@ -11,7 +11,7 @@ import router from "./routes/routes.js";
 const PORT = process.env.PORT || 5000;
 const APIKEY = process.env.APIKEY;
 const QUERY = process.env.QUERY || 'cricket';
-const INTERVAL = 1000 * 5000;
+const INTERVAL = 1000 * 10;
 
 const app = express();
 
