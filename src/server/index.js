@@ -2,17 +2,23 @@ import express from "express";
 import cors from "cors"
 import'dotenv/config';
 
-const PORT = process.env.PORT || 3000;
-const app = express();
-app.use(cors({origin  : "*"}));
-
-console.log(process.env.NODE_ENV);
-
 import connectDB from './config/config.js';
 import errorHandler from "./middleware/errorHandler.js";
-import searchData from './services/youtubePool.js'
-// connectDB();
+import insertRecords from "./services/updateDB.js"
 
+//-----------------------------------
+const PORT = process.env.PORT || 3000;
+const APIKEY = process.env.APIKEY;
+const QUERY = process.env.QUERY || 'cricket';
+const INTERVAL = 1000 * 30;
+
+const app = express();
+
+//-----------------------------------
+connectDB();
+setInterval(insertRecords, INTERVAL, APIKEY, QUERY)
+
+app.use(cors({origin  : "*"}));
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
@@ -25,5 +31,3 @@ app.use(errorHandler);
 app.listen(PORT, () => {
     console.log(`Server running at PORT  ${PORT}`)
 })
-
-// https://www.googleapis.com/youtube/v3/search/?part=snippet&key=AIzaSyBlVf_WuFtnGczj7yLogjApF4dFbgFYLcA&type=video&q=cricket

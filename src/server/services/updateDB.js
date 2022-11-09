@@ -48,19 +48,14 @@ const insertRecords = async (key, query) => {
         vidModel.findOne(objId, (err, data) => {
             if(!err){
                 if(!data){
-                    console.log('Does not exist');
+                    // console.log('Does not exist');
                     vidModel.create(obj);
                 }
             }
         });
     });
-
+    // console.log('insert records called');
 }
 
-
-let main = async () => {
-    await connectDB();
-    await insertRecords('AIzaSyBlVf_WuFtnGczj7yLogjApF4dFbgFYLcA', 'cricket')
-}
 
 export default insertRecords;
